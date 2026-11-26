@@ -535,6 +535,8 @@ const DATA = {
   /* --- NEMOVITOSTI ---
      stav: "prodej"      = záložka V nabídce
      stav: "rezervovano" = záložka V nabídce, oranžovo-modrý štítek Rezervováno
+     stav: "pripravujeme" = záložka V nabídce, štítek Připravujeme (chystané nabídky;
+                            plocha a lokalita smí být prázdné "", pak se nezobrazí)
      stav: "prodano"     = záložka Realizováno (prodeje i pronájmy)
      foto: odkaz na obrázek nebo lokální soubor ("assets/byt1.jpg").
            Prázdné ("") = zobrazí se zástupný symbol domečku.
@@ -584,6 +586,46 @@ const DATA = {
         cena: "NEDOSTUPNÉ",
         foto: "https://realitysnami.cz/wp-content/uploads/2026/09/1920x1920wm2407261155-2ddc8-novostavba-rodinneho-domu-4-kk-se-zahradou-havirov-zivotice-rd3-dji-0050-dd8089-17ffda49b6-1007072784-768x576.jpg",
         odkaz: "https://realitysnami.cz/nemovitost/novostavba-rodinneho-domu-4kk-se-zahradou-havirov-zivotice-rd3/"
+      },
+      {
+        stav: "pripravujeme",
+        nazev: "Byt 3+kk, 8. patro, dva balkóny",
+        lokalita: "Ostrava – Hrabůvka",
+        dispozice: "3+kk",
+        plocha: "53,77 m²",
+        cena: "Cena bude upřesněna",
+        foto: "assets/brzy-v-nabidce.jpg",
+        odkaz: ""
+      },
+      {
+        stav: "pripravujeme",
+        nazev: "Byt 2+1, 2. patro, dvě sklepní kóje",
+        lokalita: "Karviná – Hranice",
+        dispozice: "2+1",
+        plocha: "56,30 m²",
+        cena: "Cena bude upřesněna",
+        foto: "assets/brzy-v-nabidce.jpg",
+        odkaz: ""
+      },
+      {
+        stav: "pripravujeme",
+        nazev: "Finský domek se zahradou a garáží",
+        lokalita: "Petřvald",
+        dispozice: "Rodinný dům",
+        plocha: "",
+        cena: "Cena bude upřesněna",
+        foto: "assets/brzy-v-nabidce.jpg",
+        odkaz: ""
+      },
+      {
+        stav: "pripravujeme",
+        nazev: "Byt 3+1 s velkou lodžií, osobní vlastnictví",
+        lokalita: "Havířov – Město",
+        dispozice: "3+1",
+        plocha: "52,2 m² · lodžie 7,5 m²",
+        cena: "Cena bude upřesněna",
+        foto: "assets/brzy-v-nabidce.jpg",
+        odkaz: ""
       },
       {
         stav: "prodano",
@@ -890,11 +932,11 @@ $('#propsHeading').textContent = DATA.nemovitosti.nadpis;
 $('#propsLead').textContent = DATA.nemovitosti.lead;
 const houseIco = '<svg width="64" height="64" viewBox="0 0 24 24" fill="none"><path d="M3 11l9-7 9 7v9a1 1 0 01-1 1h-5v-6h-6v6H4a1 1 0 01-1-1v-9z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg>';
 const pinIco = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-5.1-7-11a7 7 0 1114 0c0 5.9-7 11-7 11z" stroke="#C6A15B" stroke-width="2"/><circle cx="12" cy="10" r="2.5" stroke="#C6A15B" stroke-width="2"/></svg>';
-const STITKY = { prodej:['','V nabídce'], rezervovano:['res','Rezervováno'], prodano:['sold','Realizováno'] };
+const STITKY = { prodej:['','V nabídce'], rezervovano:['res','Rezervováno'], pripravujeme:['res','Připravujeme'], prodano:['sold','Realizováno'] };
 function renderProps(filtr){
   const el = $('#props');
   const list = filtr==='prodej'
-    ? DATA.nemovitosti.seznam.filter(n=>n.stav==='prodej'||n.stav==='rezervovano')
+    ? DATA.nemovitosti.seznam.filter(n=>n.stav==='prodej'||n.stav==='rezervovano'||n.stav==='pripravujeme')
     : DATA.nemovitosti.seznam.filter(n=>n.stav===filtr);
   el.innerHTML = list.length ? list.map(n=>`
     <article class="card">
@@ -904,8 +946,8 @@ function renderProps(filtr){
       </div>
       <div class="body">
         <h3>${esc(n.nazev)}</h3>
-        <span class="loc">${pinIco}${esc(n.lokalita)}</span>
-        <div class="meta"><span>${esc(n.dispozice)}</span><span>·</span><span>${esc(n.plocha)}</span></div>
+        ${n.lokalita ? `<span class="loc">${pinIco}${esc(n.lokalita)}</span>` : ''}
+        <div class="meta"><span>${esc(n.dispozice)}</span>${n.plocha ? `<span>·</span><span>${esc(n.plocha)}</span>` : ''}</div>
         <div class="price-row">
           <span class="price-block">${n.puvodniCena ? `<s class="price-old">${esc(n.puvodniCena)}</s>` : ''}<span class="price">${esc(n.cena)}</span></span>
           ${n.odkaz ? `<a class="more" href="${n.odkaz}" target="_blank" rel="noopener">Detail →</a>` : ''}
