@@ -2,7 +2,7 @@
 
 Web je jeden soubor: **index.html**. Otevřeš ho dvojklikem v prohlížeči.
 Úpravy: otevři index.html v Poznámkovém bloku (nebo VS Code), změň text, ulož (Ctrl+S),
-v prohlížeči obnov stránku (F5). Nahrání nové verze = přetáhnout celou složku na Netlify.
+v prohlížeči obnov stránku (F5). Nahrání nové verze: v GitHub Desktop **Commit to main** → **Push origin**, Netlify web do minuty aktualizuje sám.
 
 ## Pořadí sekcí
 
@@ -70,4 +70,4 @@ ne to, kdo ho tam vložil. Schvalování navíc chrání před spamem.
   na žádost back office nesmí používat logo ani barvy ProsperityFS.
 - Fotky nemovitostí se načítají z realitysnami.cz. Pro ostrý provoz je lepší
   je stáhnout do `assets/` a změnit cesty v DATA.
-- Nasazení: Netlify Drop (zdarma). Vlastní doména `.cz` cca 150–250 Kč/rok.
+- Nasazení: Netlify napojené na GitHub repozitář (větev `main`), každý push se nasadí automaticky. Vlastní doména `.cz` cca 150–250 Kč/rok.
