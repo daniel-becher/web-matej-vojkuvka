@@ -1,0 +1,4 @@
+# Nastavení pro Netlify — web je čisté HTML, nic se nesestavuje.
+[build]
+  publish = "."
+  command = ""

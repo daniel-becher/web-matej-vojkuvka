@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matěj Vojkůvka | Realitní makléř Ostrava – reality na klíč</title>
+<meta name="description" content="Nacenění nemovitosti zdarma. Reality na klíč – vy se o nic nestaráte, vše zařídím za vás. Matěj Vojkůvka, realitní makléř. Ostrava, Karviná a celý Moravskoslezský kraj.">
+<!-- Písmo přes Bunny Fonts (evropská služba, neukládá IP adresy — GDPR) -->
+<link rel="preconnect" href="https://fonts.bunny.net">
+<link href="https://fonts.bunny.net/css?family=manrope:400,500,600,700,800&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================
+   BARVY A ZÁKLAD — vlastní identita: grafit + mosazná zlatá
+   (názvy proměnných zůstaly kvůli kompatibilitě kódu)
+   ========================================================== */
+:root{
+  --navy:#16181B;          /* grafit — hlavní tmavá */
+  --navy-dark:#0E0F11;
+  --navy-light:#24272C;
+  --orange:#C6A15B;        /* mosazná zlatá — akcent */
+  --orange-light:#D9B97A;
+  --gold-text:#8C6A2F;     /* tmavší zlatá pro text na světlém pozadí (čitelnost) */
+  --white:#ffffff;
+  --off:#F4F2EE;
+  --cream:#F6F3EE;
+  --text:#23262B;
+  --muted:#6B6F76;
+  --line:#E7E3DC;
+  --radius:20px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',sans-serif;color:var(--text);background:var(--white);line-height:1.65;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{color:var(--navy);line-height:1.18;font-weight:700}
+section{position:relative}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.kicker{display:inline-block;color:var(--gold-text);font-weight:700;font-size:.98rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:16px}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--orange);color:var(--navy);font-weight:700;font-size:1rem;padding:16px 34px;border-radius:200px;border:none;cursor:pointer;transition:.25s;box-shadow:0 10px 26px rgba(198,161,91,.32);font-family:inherit}
+.btn:hover{background:var(--orange-light);transform:translateY(-2px)}
+.btn.ghost{background:transparent;border:2px solid rgba(255,255,255,.45);box-shadow:none;color:#fff}
+.btn.ghost:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+.btn.navy{background:var(--navy);color:#fff;box-shadow:0 10px 26px rgba(22,24,27,.28)}
+.btn.navy:hover{background:var(--navy-light)}
+.btn.outline{background:transparent;border:2px solid var(--orange);color:var(--gold-text);box-shadow:none}
+.btn.outline:hover{background:var(--orange);color:var(--navy)}
+
+/* ================= NAVIGACE ================= */
+nav{position:fixed;inset:0 0 auto 0;z-index:100;transition:.3s;padding:16px 0}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:16px}
+.monogram{width:44px;height:44px;flex:none;border-radius:12px;border:1.5px solid var(--orange);color:var(--orange);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;letter-spacing:.04em}
+.brand .name{color:#fff;font-weight:800;font-size:1.6rem;line-height:1.1;letter-spacing:-.01em}
+.brand .name small{display:block;font-weight:500;font-size:.62rem;opacity:.62;letter-spacing:.16em;text-transform:uppercase;margin-top:3px}
+.navlinks{display:flex;align-items:center;gap:26px}
+.navlinks a{color:rgba(255,255,255,.85);font-weight:600;font-size:.92rem;transition:.2s}
+.navlinks a:hover{color:var(--orange-light)}
+.nav-cta{background:var(--orange);color:var(--navy)!important;padding:10px 22px;border-radius:200px;font-weight:700}
+.nav-cta:hover{background:var(--orange-light);color:var(--navy)!important}
+nav.scrolled{background:rgba(14,15,17,.93);backdrop-filter:blur(12px);box-shadow:0 4px 24px rgba(0,0,0,.22);padding:9px 0}
+nav.scrolled .brand .name{font-size:1.32rem}
+.burger{display:none;background:none;border:none;cursor:pointer;width:40px;height:40px;position:relative;z-index:110}
+.burger span{display:block;width:24px;height:2px;background:#fff;margin:5px auto;transition:.3s}
+
+/* ================= HERO ================= */
+.hero{min-height:100svh;display:flex;align-items:center;background:var(--navy);overflow:hidden}
+.hero-bg{position:absolute;inset:0;overflow:hidden}
+.hero-bg video,.hero-bg .kenburns{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-bg .kenburns{background-size:cover;background-position:center;animation:kb 28s ease-in-out infinite alternate}
+@keyframes kb{from{transform:scale(1) translate(0,0)}to{transform:scale(1.12) translate(-1.5%,1.5%)}}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,15,17,.8) 0%,rgba(14,15,17,.64) 45%,rgba(14,15,17,.9) 100%)}
+.hero .wrap{position:relative;z-index:2;text-align:center;padding-top:110px;padding-bottom:80px}
+.hero h1{color:#fff;font-size:clamp(2.2rem,5vw,4rem);font-weight:800;margin-bottom:24px;max-width:900px;margin-inline:auto}
+.hero h1 em{font-style:normal;color:var(--orange-light)}
+.hero .lead{color:rgba(255,255,255,.85);font-size:clamp(1.02rem,1.6vw,1.2rem);max-width:640px;margin:0 auto 22px}
+.free-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(198,161,91,.16);border:1.5px solid rgba(217,185,122,.55);color:#fff;font-weight:700;font-size:.95rem;padding:11px 24px;border-radius:200px;margin-bottom:26px;backdrop-filter:blur(6px)}
+.free-badge b{color:var(--orange-light)}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:38px}
+.hero-chips{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.chip{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(6px);color:rgba(255,255,255,.9);font-size:.85rem;font-weight:600;padding:9px 17px;border-radius:200px}
+.chip svg{flex:none}
+.scroll-hint{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.5);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;z-index:3;animation:bob 2.2s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+
+/* ================= SEKCE OBECNĚ ================= */
+.section{padding:110px 0}
+.section.alt{background:var(--off)}
+.section.cream{background:var(--cream)}
+.sec-head{max-width:680px;margin-bottom:58px}
+.sec-head.center{margin-inline:auto;text-align:center}
+.sec-head h2{font-size:clamp(1.85rem,3.5vw,2.75rem);margin-bottom:16px}
+.sec-head p{color:var(--muted);font-size:1.05rem}
+
+/* ================= O MNĚ ================= */
+.about{display:grid;grid-template-columns:.85fr 1.15fr;gap:70px;align-items:center}
+.about-img{position:relative}
+.about-img img{border-radius:var(--radius);box-shadow:0 30px 60px rgba(22,24,27,.2)}
+.about-img::after{content:"";position:absolute;inset:26px -26px -26px 26px;border:3px solid var(--orange);border-radius:var(--radius);z-index:-1}
+.about-badge{position:absolute;bottom:24px;left:-28px;background:var(--navy);color:#fff;padding:14px 24px;border-radius:14px;box-shadow:0 16px 32px rgba(22,24,27,.32);font-weight:700;font-size:1.02rem}
+.about h2{font-size:clamp(1.85rem,3.2vw,2.5rem);margin-bottom:20px}
+.about p{color:var(--muted);margin-bottom:16px}
+.about .btn{margin-top:12px}
+
+/* ================= REALITY NA KLÍČ ================= */
+.turnkey{background:linear-gradient(125deg,var(--navy-dark),var(--navy) 55%,var(--navy-light));color:#fff;overflow:hidden}
+.turnkey::before{content:"";position:absolute;top:-140px;right:-120px;width:460px;height:460px;border-radius:50%;background:radial-gradient(circle,rgba(198,161,91,.22),transparent 65%)}
+.turnkey .kicker{color:var(--orange-light)}
+.turnkey h2{color:#fff}
+.turnkey .sec-head p{color:rgba(255,255,255,.78)}
+.tk-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;position:relative;z-index:2}
+.tk{display:flex;gap:18px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);padding:28px 26px;transition:.3s}
+.tk:hover{background:rgba(255,255,255,.09);transform:translateY(-4px)}
+.tk .ico{width:48px;height:48px;flex:none;border-radius:13px;background:rgba(198,161,91,.18);display:flex;align-items:center;justify-content:center}
+.tk h3{color:#fff;font-size:1.08rem;margin-bottom:7px}
+.tk p{color:rgba(255,255,255,.72);font-size:.93rem}
+.tk-note{margin-top:42px;text-align:center;position:relative;z-index:2}
+.tk-note p{color:rgba(255,255,255,.8);font-size:1.05rem;max-width:620px;margin:0 auto 26px}
+
+/* ================= NACENĚNÍ ZDARMA (pruh) ================= */
+.freebar{background:var(--orange);color:var(--navy);padding:46px 0}
+.freebar .wrap{display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.freebar h3{color:var(--navy);font-size:clamp(1.35rem,2.5vw,1.9rem);margin-bottom:6px}
+.freebar p{color:rgba(22,24,27,.8);font-size:.98rem;max-width:560px}
+.freebar .btn{background:var(--navy);color:#fff;box-shadow:0 10px 26px rgba(0,0,0,.18)}
+.freebar .btn:hover{background:#fff;color:var(--navy)}
+
+/* ================= NEMOVITOSTI ================= */
+.tabs{display:flex;gap:10px;margin-bottom:42px}
+.tab{background:#fff;border:2px solid var(--line);color:var(--navy);font-weight:700;font-size:.94rem;padding:11px 26px;border-radius:200px;cursor:pointer;transition:.2s;font-family:inherit}
+.tab.active{background:var(--navy);border-color:var(--navy);color:#fff}
+.tab:not(.active):hover{border-color:var(--orange)}
+.grid-props{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:0 10px 30px rgba(22,24,27,.08);transition:.3s;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-6px);box-shadow:0 22px 44px rgba(22,24,27,.14)}
+.card .ph{position:relative;aspect-ratio:3/2;overflow:hidden;background:linear-gradient(135deg,var(--navy),var(--navy-light))}
+.card .ph img{width:100%;height:100%;object-fit:cover;transition:.5s}
+.card:hover .ph img{transform:scale(1.06)}
+.card .ph .noimg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.35}
+.badge{position:absolute;top:14px;left:14px;padding:6px 14px;border-radius:200px;font-size:.73rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--navy);background:var(--orange)}
+.badge.sold{background:var(--navy);color:#fff;border:1px solid rgba(255,255,255,.3)}
+.badge.res{background:var(--navy-light);color:#fff;border:1px solid var(--orange-light)}
+.card .body{padding:24px;display:flex;flex-direction:column;flex:1}
+.card h3{font-size:1.05rem;margin-bottom:6px}
+.card .loc{color:var(--muted);font-size:.87rem;display:flex;align-items:center;gap:6px;margin-bottom:16px}
+.card .meta{display:flex;gap:14px;color:var(--muted);font-size:.84rem;font-weight:600;margin-bottom:18px}
+.card .price-row{margin-top:auto;display:flex;align-items:center;justify-content:space-between}
+.card .price{color:var(--navy);font-weight:800;font-size:1.18rem}
+.card .more{color:var(--gold-text);font-weight:700;font-size:.89rem}
+.card .more:hover{text-decoration:underline}
+
+/* ================= REFERENCE (karusel) ================= */
+.ref-top{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:40px;flex-wrap:wrap}
+.ref-top .sec-head{margin-bottom:0}
+.ref-nav{display:flex;gap:10px}
+.arrow{width:50px;height:50px;border-radius:50%;border:2px solid var(--line);background:#fff;color:var(--navy);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.22s}
+.arrow:hover:not(:disabled){border-color:var(--orange);background:var(--orange);color:var(--navy)}
+.arrow:disabled{opacity:.32;cursor:default}
+.ref-viewport{overflow:hidden}
+.ref-track{display:flex;gap:28px;transition:transform .45s cubic-bezier(.4,0,.2,1)}
+.ref{background:#fff;border-radius:var(--radius);padding:34px;box-shadow:0 10px 30px rgba(22,24,27,.07);flex:0 0 calc((100% - 56px)/3);display:flex;flex-direction:column}
+.ref .stars{color:var(--orange);letter-spacing:3px;margin-bottom:16px;font-size:1.05rem}
+.ref p{color:var(--text);font-size:.93rem;margin-bottom:22px;flex:1;line-height:1.6}
+.ref b{display:block;color:var(--navy)}
+.ref span{color:var(--muted);font-size:.82rem}
+.ref-cta{margin-top:44px;text-align:center}
+.ref-cta p{color:var(--muted);margin-bottom:18px}
+
+/* ================= BLOG ================= */
+.posts{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.post{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:32px 30px;display:flex;flex-direction:column;transition:.3s;cursor:pointer}
+.post:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(22,24,27,.1);border-color:transparent}
+.post .tag{align-self:flex-start;background:rgba(198,161,91,.16);color:var(--gold-text);font-size:.73rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 13px;border-radius:200px;margin-bottom:16px}
+.post .date{color:var(--muted);font-size:.8rem;margin-bottom:10px}
+.post h3{font-size:1.14rem;margin-bottom:11px}
+.post p{color:var(--muted);font-size:.93rem;flex:1;margin-bottom:18px}
+.post .more{color:var(--gold-text);font-weight:700;font-size:.89rem}
+.post:hover .more{text-decoration:underline}
+
+/* ================= MODAL (článek) ================= */
+.modal{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(14,15,17,.72);backdrop-filter:blur(5px)}
+.modal.open{display:flex}
+.modal-box{background:#fff;border-radius:var(--radius);max-width:720px;width:100%;max-height:86vh;overflow-y:auto;padding:44px 46px;position:relative;box-shadow:0 40px 80px rgba(0,0,0,.4)}
+.modal-box .tag{display:inline-block;background:rgba(198,161,91,.16);color:var(--gold-text);font-size:.73rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 13px;border-radius:200px;margin-bottom:16px}
+.modal-box h3{font-size:clamp(1.4rem,2.6vw,1.9rem);margin-bottom:8px}
+.modal-box .m-date{color:var(--muted);font-size:.84rem;margin-bottom:22px}
+.modal-box p{color:var(--text);margin-bottom:16px;font-size:1rem}
+.modal-close{position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:50%;border:none;background:var(--off);color:var(--navy);font-size:1.3rem;cursor:pointer;transition:.2s;line-height:1}
+.modal-close:hover{background:var(--orange);color:#fff}
+
+/* ================= KONTAKT ================= */
+.contact{background:linear-gradient(120deg,var(--navy-dark),var(--navy) 60%,var(--navy-light));color:#fff;overflow:hidden}
+.contact .kicker{color:var(--orange-light)}
+.contact h2{color:#fff}
+.contact .sec-head p{color:rgba(255,255,255,.75)}
+.contact-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:60px;align-items:start}
+.c-photo{position:relative;margin-bottom:34px}
+.c-photo img{border-radius:var(--radius);box-shadow:0 26px 52px rgba(0,0,0,.4)}
+.c-item{display:flex;gap:16px;align-items:center;margin-bottom:22px}
+.c-item .ico{width:50px;height:50px;flex:none;border-radius:14px;background:rgba(198,161,91,.15);display:flex;align-items:center;justify-content:center}
+.c-item a,.c-item b{font-weight:700;font-size:1.1rem}
+.c-item a:hover{color:var(--orange-light)}
+.c-item span{display:block;font-size:.79rem;color:rgba(255,255,255,.6)}
+.socials{margin-top:30px;padding-top:28px;border-top:1px solid rgba(255,255,255,.14)}
+.socials p{font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6);font-weight:700;margin-bottom:16px}
+.soc-links{display:flex;gap:14px}
+.soc{width:52px;height:52px;border-radius:15px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;transition:.25s}
+.soc:hover{background:var(--orange);border-color:var(--orange);transform:translateY(-3px)}
+.soc:hover svg{fill:var(--navy)}
+.soc svg{fill:#fff}
+
+/* ================= FORMULÁŘE ================= */
+.form{background:#fff;border-radius:var(--radius);padding:40px;box-shadow:0 30px 60px rgba(0,0,0,.28)}
+.form h3{margin-bottom:6px;font-size:1.3rem}
+.form .fnote{color:var(--muted);font-size:.88rem;margin-bottom:20px}
+.form label{display:block;font-weight:600;font-size:.84rem;color:var(--navy);margin:16px 0 6px}
+.form input,.form textarea{width:100%;border:2px solid var(--line);border-radius:12px;padding:13px 16px;font-family:inherit;font-size:.95rem;transition:.2s;background:var(--off);color:var(--text)}
+.form input:focus,.form textarea:focus{outline:none;border-color:var(--orange);background:#fff}
+.form button{width:100%;justify-content:center;margin-top:24px}
+.form .note{font-size:.74rem;color:var(--muted);margin-top:14px;text-align:center;line-height:1.5}
+.form .note a{color:var(--gold-text);text-decoration:underline}
+.hp{position:absolute;left:-9999px}
+.msg{display:none;margin-top:16px;padding:14px 18px;border-radius:12px;font-size:.92rem;font-weight:600;text-align:center}
+.msg.ok{display:block;background:rgba(198,161,91,.12);color:#8a5200}
+.msg.err{display:block;background:#fdecec;color:#a12626}
+
+/* ================= FOOTER ================= */
+footer{background:var(--navy-dark);color:rgba(255,255,255,.62);padding:36px 0}
+footer .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer .monogram{width:36px;height:36px;font-size:.85rem;border-radius:10px}
+footer .f-left{display:flex;align-items:center;gap:16px;font-size:.84rem}
+footer a:hover{color:#fff}
+footer .f-links{display:flex;flex-wrap:wrap;gap:10px 22px;font-size:.84rem}
+
+/* ================= ANIMACE PŘI SCROLLU ================= */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s ease,transform .75s ease}
+.reveal.on{opacity:1;transform:none}
+
+/* ================= RESPONZIVITA ================= */
+@media(max-width:980px){
+  .brand .name{font-size:1.3rem}
+  .about{grid-template-columns:1fr;gap:52px}
+  .about-badge{left:12px}
+  .tk-grid{grid-template-columns:1fr}
+  .grid-props,.posts{grid-template-columns:repeat(2,1fr)}
+  .ref{flex:0 0 calc((100% - 28px)/2)}
+  .contact-grid{grid-template-columns:1fr;gap:48px}
+  .navlinks{position:fixed;inset:0;background:rgba(14,15,17,.97);backdrop-filter:blur(14px);flex-direction:column;justify-content:center;gap:32px;transform:translateX(100%);transition:.35s}
+  .navlinks.open{transform:none}
+  .navlinks a{font-size:1.25rem}
+  .burger{display:block}
+  .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .burger.open span:nth-child(2){opacity:0}
+  .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+}
+@media(max-width:640px){
+  .grid-props,.posts{grid-template-columns:1fr}
+  .ref{flex:0 0 100%}
+  .section{padding:78px 0}
+  .brand .name{font-size:1.15rem}
+  .brand .name small{font-size:.56rem}
+  .freebar .wrap{justify-content:center;text-align:center}
+  .form{padding:28px 22px}
+  .modal-box{padding:34px 26px}
+  .hero-ctas .btn{width:100%;justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAVIGACE ============ -->
+<nav id="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <span class="monogram" aria-hidden="true">MV</span>
+      <span class="name" id="brandName">Matěj Vojkůvka<small id="brandTitle">Realitní makléř</small></span>
+    </a>
+    <div class="navlinks" id="navlinks">
+      <a href="#o-mne">O mně</a>
+      <a href="#na-klic">Reality na klíč</a>
+      <a href="#nemovitosti">Nemovitosti</a>
+      <a href="#reference">Reference</a>
+      <a href="#blog" id="navBlog">Blog</a>
+      <a href="#kontakt" class="nav-cta">Nacenění zdarma</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="wrap">
+    <h1 id="heroTitle"></h1>
+    <p class="lead" id="heroLead"></p>
+    <div class="hero-ctas">
+      <a class="btn" href="#kontakt" id="heroCta1"></a>
+      <a class="btn ghost" href="#o-mne" id="heroCta2"></a>
+    </div>
+    <div class="hero-chips" id="heroChips"></div>
+  </div>
+  <span class="scroll-hint">Scrollujte</span>
+</header>
+
+<!-- ============ O MNĚ ============ -->
+<section class="section" id="o-mne">
+  <div class="wrap about">
+    <div class="about-img reveal">
+      <img id="aboutFoto" alt="Matěj Vojkůvka – realitní makléř">
+      <div class="about-badge" id="aboutBadge"></div>
+    </div>
+    <div class="reveal">
+      <span class="kicker">O mně</span>
+      <h2 id="aboutHeading"></h2>
+      <div id="aboutText"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REALITY NA KLÍČ ============ -->
+<section class="section turnkey" id="na-klic">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="kicker">Proč zrovna se mnou</span>
+      <h2 id="tkHeading"></h2>
+      <p id="tkLead"></p>
+    </div>
+    <div class="tk-grid" id="tkGrid"></div>
+    <div class="tk-note reveal">
+      <p id="tkNote"></p>
+      <a class="btn" href="#kontakt">Domluvit nezávaznou schůzku</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NACENĚNÍ ZDARMA ============ -->
+<div class="freebar">
+  <div class="wrap">
+    <div>
+      <h3 id="freeTitle"></h3>
+      <p id="freeText"></p>
+    </div>
+    <a class="btn" href="#kontakt">Chci znát cenu nemovitosti</a>
+  </div>
+</div>
+
+<!-- ============ NEMOVITOSTI ============ -->
+<section class="section" id="nemovitosti">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Nemovitosti</span>
+      <h2 id="propsHeading"></h2>
+      <p id="propsLead"></p>
+    </div>
+    <div class="tabs reveal">
+      <button class="tab active" data-f="prodej">V nabídce</button>
+      <button class="tab" data-f="prodano">Realizováno</button>
+    </div>
+    <div class="grid-props" id="props"></div>
+  </div>
+</section>
+
+<!-- ============ REFERENCE ============ -->
+<section class="section alt" id="reference">
+  <div class="wrap">
+    <div class="ref-top reveal">
+      <div class="sec-head">
+        <span class="kicker">Reference</span>
+        <h2>Co říkají klienti</h2>
+      </div>
+      <div class="ref-nav">
+        <button class="arrow" id="refPrev" aria-label="Předchozí">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="arrow" id="refNext" aria-label="Další">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="ref-viewport reveal"><div class="ref-track" id="refTrack"></div></div>
+  </div>
+</section>
+
+<!-- ============ BLOG ============ -->
+<section class="section cream" id="blog">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Blog</span>
+      <h2 id="blogHeading"></h2>
+      <p id="blogLead"></p>
+    </div>
+    <div class="posts" id="posts"></div>
+  </div>
+</section>
+
+<!-- ============ MODAL S ČLÁNKEM ============ -->
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose" aria-label="Zavřít">&times;</button>
+    <span class="tag" id="mTag"></span>
+    <h3 id="mTitle"></h3>
+    <p class="m-date" id="mDate"></p>
+    <div id="mBody"></div>
+  </div>
+</div>
+
+<!-- ============ KONTAKT ============ -->
+<section class="section contact" id="kontakt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Kontakt</span>
+      <h2 id="contactHeading"></h2>
+      <p id="contactLead"></p>
+    </div>
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="c-photo"><img id="contactFoto" alt="Matěj Vojkůvka"></div>
+        <div id="contactItems"></div>
+        <div class="socials">
+          <p>Sleduj mě</p>
+          <div class="soc-links" id="socLinks"></div>
+        </div>
+      </div>
+      <div class="form reveal">
+        <h3>Nacenění nemovitosti zdarma</h3>
+        <p class="fnote">Napište mi pár slov o nemovitosti a ozvu se vám do 24 hodin.</p>
+        <form name="poptavka" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contactForm">
+          <input type="hidden" name="form-name" value="poptavka">
+          <p class="hp"><label>Nevyplňujte: <input name="bot-field"></label></p>
+          <label>Jméno a příjmení</label>
+          <input type="text" name="jmeno" required placeholder="Jan Novák">
+          <label>E-mail</label>
+          <input type="email" name="email" required placeholder="jan.novak@email.cz">
+          <label>Telefon</label>
+          <input type="tel" name="telefon" required placeholder="+420 ...">
+          <label>O jakou nemovitost jde?</label>
+          <textarea name="zprava" rows="4" required placeholder="Byt 3+1 Ostrava centrum, chtěl bych znát cenu…"></textarea>
+          <button class="btn" type="submit">Odeslat a získat nacenění</button>
+          <p class="note">Odesláním formuláře souhlasíte se zpracováním osobních údajů za účelem vyřízení vaší poptávky. Více informací naleznete v <a id="gdprLink" target="_blank" rel="noopener">Zásadách zpracování osobních údajů</a>.</p>
+          <div class="msg" id="contactMsg"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="f-left">
+      <span class="monogram" aria-hidden="true">MV</span>
+      <span id="footText"></span>
+    </div>
+    <div class="f-links">
+      <a href="#" id="footProfil" target="_blank" rel="noopener">Profil na realitysnami.cz</a>
+      <a href="#kontakt">Kontakt</a>
+      <a href="zasady.html">Zásady zpracování osobních údajů</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* =====================================================================
+   ✏️  EDITOVATELNÁ DATA — TADY SE MĚNÍ OBSAH WEBU
+   Vše, co je na stránce vidět, se upravuje v tomto bloku.
+   Stačí přepsat text v uvozovkách, uložit soubor (Ctrl+S)
+   a v prohlížeči obnovit stránku (F5).
+   ===================================================================== */
+const DATA = {
+
+  /* --- Základní údaje makléře --- */
+  jmeno: "Matěj Vojkůvka",
+  titul: "Realitní makléř",
+  regionKratky: "Ostrava a okolí",                              /* do štítků a menu */
+  regionDlouhy: "Ostrava, Karviná a celý Moravskoslezský kraj", /* do delších textů */
+  telefon: "+420 731 529 332",
+  email: "matej.vojkuvka@prosperityfs.cz",
+  profilUrl: "https://realitysnami.cz/nasi-makleri/matej-vojkuvka/",
+  gdprUrl: "zasady.html",   /* vlastní zásady zpracování osobních údajů */
+
+  /* --- Sociální sítě (sekce „Sleduj mě") --- */
+  instagram: "https://www.instagram.com/matej.vojkuvka.reality/",
+  facebook: "https://www.facebook.com/Matej.Vojkuvka.Reality",
+
+  /* --- ÚVODNÍ OBRAZOVKA (hero) ---
+     video: cesta k videu na pozadí, např. "assets/video.mp4".
+            Ideálně 1–2 min sestřih prostřihů z inzercí (Ostrava, pozemek…),
+            bez zvuku, ve smyčce. Když je prázdné (""), použije se fotka. */
+  hero: {
+    video: "assets/video.mp4",              /* na šířku – počítače */
+    videoMobil: "assets/video-mobil.mp4",   /* na výšku – telefony (do ~15 MB) */
+    pozadiFoto: "assets/foto-kancelar.png",
+    titulek: 'Prodej nemovitosti <em>na klíč</em>. Vy se o nic nestaráte',
+    podtitulek: "Sejdeme se, domluvíme podmínky — a od té chvíle vyřídím všechno, co za vás vyřídit můžu. Vy jen podepíšete a inkasujete.",
+    cta1: "Chci nacenění zdarma",
+    cta2: "Poznat mě blíž",
+    stitky: ["Nacenění zdarma", "Vše vyřídím za vás", "Ostrava a okolí"]
+  },
+
+  /* --- Sekce O MNĚ (fotka č. 1) --- */
+  oMne: {
+    foto: "assets/o-mne-foto.png",
+    odznak: "Realitní makléř",
+    nadpis: "",   /* prázdné = nadpis se nezobrazí */
+    odstavce: [
+      "Než jsem se začal naplno věnovat realitám, několik let jsem získával zkušenosti v provozu a postupně také ve vedoucích pozicích. Naučilo mě to převzít odpovědnost, řešit nečekané situace a jednat s lidmi, kteří mají každý jiné potřeby a očekávání.",
+      "Dnes tyhle zkušenosti využívám při prodeji nemovitostí. Záleží mi na tom, abyste věděli, co se s vaší nemovitostí děje, rozuměli jednotlivým krokům a měli vedle sebe někoho, kdo věci nejen naplánuje, ale také dotáhne.",
+      "Každá nemovitost i životní situace jejího majitele je jiná. Proto nechci používat jeden univerzální postup na všechny. Nejdřív chci pochopit, co potřebujete, a potom společně najít řešení, které dává smysl. Jednám na rovinu, neslibuji nemožné a věřím, že dobrá spolupráce stojí především na důvěře."
+    ]
+  },
+
+  /* --- PROČ ZROVNA SE MNOU (reality na klíč) --- */
+  naKlic: {
+    nadpis: "Reality na klíč — jedna schůzka a máte hotovo",
+    lead: "Většina lidí odkládá prodej, protože si myslí, že je s tím spousta práce nebo se v celém procesu nevyznají. U mě je práce klienta v podstatě jen jedna – přijít na schůzku.",
+    body: [
+      { nazev: "Nacenění zdarma a nezávazně", popis: "Nemovitost zdarma ocením podle aktuální situace na trhu a vše vám srozumitelně vysvětlím. Neplatíte nic a k ničemu se nezavazujete." },
+      { nazev: "Profesionální prezentace", popis: "Profesionální fotografie, video, 3D prohlídka, vizualizace i propagace jsou samozřejmou součástí mé práce." },
+      { nazev: "Jednáte pořád se mnou", popis: "Žádné přehazování mezi kolegy a asistentkami. Máte moje číslo a voláte přímo mně." },
+      { nazev: "Pomoc kupujícím s financováním", popis: "Plánujete koupi nemovitosti na hypotéku? Na vaše přání mohu předat váš kontakt vázanému zástupci naší společnosti, který se s vámi osobně setká a probere možnosti financování. Využití této možnosti je zcela dobrovolné a nemá žádný vliv na podmínky prodeje ani na průběh realitního zprostředkování." },
+      { nazev: "Prohlídky vedu osobně", popis: "Nemusíte si brát volno ani trávit čas prohlídkami. Zájemce provedu nemovitostí a průběžně vás informuji o výsledcích." },
+      { nazev: "Papírování vyřídím za vás", popis: "Veškerou administrativu zařídím za vás. Ve spolupráci s advokátní kanceláří zajistím smluvní dokumentaci, přepis na katastru i samotné předání nemovitosti novému majiteli." }
+    ],
+    zaver: "Stačí jedna nezávazná schůzka. Domluvíme podmínky a o zbytek se postarám."
+  },
+
+  /* --- Oranžový pruh s nabídkou zdarma --- */
+  zdarma: {
+    nadpis: "Kolik má dnes vaše nemovitost skutečně hodnotu?",
+    text: "Připravím vám bezplatný a nezávazný odhad tržní ceny na základě skutečných prodejů, aktuální situace ve vaší lokalitě a hlavně podle Vaší nemovitosti, protože každá je jiná. Ne jen orientační číslo z internetové kalkulačky."
+  },
+
+  /* --- NEMOVITOSTI ---
+     stav: "prodej"      = záložka V nabídce
+     stav: "rezervovano" = záložka V nabídce, oranžovo-modrý štítek Rezervováno
+     stav: "prodano"     = záložka Realizováno (prodeje i pronájmy)
+     foto: odkaz na obrázek nebo lokální soubor ("assets/byt1.jpg").
+           Prázdné ("") = zobrazí se zástupný symbol domečku.
+     Novou nemovitost přidáte zkopírováním celého bloku { ... }, vč. čárky. */
+  nemovitosti: {
+    nadpis: "Aktuální nabídka a úspěšně prodané",
+    lead: "Dosud realizované prodeje v celkové hodnotě 22 170 800 Kč. Díky správně nastavenému prodeji se navíc podařilo klientům získat celkem 490 000 Kč navíc.",
+    seznam: [
+      {
+        stav: "prodej",
+        nazev: "Prodej bytu 3+1 s výhledem na Karvinou",
+        lokalita: "Karviná – Mizerov, Kpt. Jaroše",
+        dispozice: "3+1",
+        plocha: "64 m²",
+        cena: "2 490 000 Kč",
+        foto: "https://realitysnami.cz/wp-content/uploads/2026/10/1920x1920wm2508081243-7bcad-dsc00208-579dda49b6-4177400582-768x512.jpg",
+        odkaz: "https://realitysnami.cz/nemovitost/prodej-bytu-31-s-vyhledem-na-karvinou-64-m%c2%b2-karvina-mizerov/"
+      },
+      {
+        stav: "prodej",
+        nazev: "Pronájem bytu 3+kk, Nové Lauby",
+        lokalita: "Ostrava – Moravská Ostrava, Dlouhá",
+        dispozice: "3+kk",
+        plocha: "87,5 m²",
+        cena: "33 000 Kč / měsíc",
+        foto: "https://realitysnami.cz/wp-content/uploads/2026/10/1920x1920wm2407261155-42478-pronajem-vybaveneho-bytu-3-kk-875-m2-ostrava-ul-dlouha-1363da49b6-907716339-768x576.jpg",
+        odkaz: "https://realitysnami.cz/nemovitost/pronajem-bytu-3kk-875-m2-dlouha-ostrava-moravska-ostrava/"
+      },
+      {
+        stav: "prodej",
+        nazev: "Pronájem bytu 3+kk, 11. patro",
+        lokalita: "Ostrava – Hrabůvka, Plzeňská",
+        dispozice: "3+kk",
+        plocha: "53 m²",
+        cena: "13 000 Kč / měsíc",
+        foto: "https://realitysnami.cz/wp-content/uploads/2026/10/1920x1920wm2407261155-d94d1-pronajem-bytu-3-kk-53-m2-ostrava-hrabuvka-kuchyn-1-3761da49b6-585109895-768x512.jpg",
+        odkaz: "https://realitysnami.cz/nemovitost/pronajem-bytu-3kk-53-m%c2%b2-ostrava-hrabuvka/"
+      },
+      {
+        stav: "prodej",
+        nazev: "Novostavba RD 4+kk – RD2, vzorový dům",
+        lokalita: "Havířov – Životice",
+        dispozice: "4+kk",
+        plocha: "97 m² · pozemek 378 m²",
+        cena: "8 490 000 Kč",
+        foto: "https://realitysnami.cz/wp-content/uploads/2026/09/1920x1920wm2407261155-1279f-dsc04631-hdr-3f6cda49b6-1666146465-768x512.jpg",
+        odkaz: "https://realitysnami.cz/nemovitost/novostavba-rodinneho-domu-4kk-se-zahradou-havirov-zivotice/"
+      },
+      {
+        stav: "prodej",
+        nazev: "Novostavba RD 4+kk – RD1, kuchyně v ceně",
+        lokalita: "Havířov – Životice",
+        dispozice: "4+kk",
+        plocha: "97 m² · pozemek 384 m²",
+        cena: "8 490 000 Kč",
+        foto: "https://realitysnami.cz/wp-content/uploads/2026/09/1920x1920wm2407261155-80919-novostavba-rodinneho-domu-4-kk-se-zahradou-havirov-zivotice-rd1-dji-0046-a5a1d9-33c4da49b6-2608835372-768x576.jpg",
+        odkaz: "https://realitysnami.cz/nemovitost/novostavba-rodinneho-domu-4kk-se-zahradou-havirov-zivotice-rd1/"
+      },
+      {
+        stav: "prodej",
+        nazev: "Novostavba RD 4+kk – RD3, kuchyně v ceně",
+        lokalita: "Havířov – Životice",
+        dispozice: "4+kk",
+        plocha: "97 m² · pozemek 370 m²",
+        cena: "8 490 000 Kč",
+        foto: "https://realitysnami.cz/wp-content/uploads/2026/09/1920x1920wm2407261155-2ddc8-novostavba-rodinneho-domu-4-kk-se-zahradou-havirov-zivotice-rd3-dji-0050-dd8089-17ffda49b6-1007072784-768x576.jpg",
+        odkaz: "https://realitysnami.cz/nemovitost/novostavba-rodinneho-domu-4kk-se-zahradou-havirov-zivotice-rd3/"
+      },
+      {
+        stav: "prodano",
+        nazev: "Podnájem bytu 2+1 s lodžií",
+        lokalita: "Karviná – Mizerov, Na Kopci",
+        dispozice: "2+1",
+        plocha: "60 m²",
+        cena: "13 000 Kč / měsíc",
+        foto: "https://realitysnami.cz/wp-content/uploads/2026/09/1920x1920wm2407261155-a11aa-pronajem-bytu-3-1-60-m2-karvina-mizerov-img-4793-3e13da49b6-2051247529-768x1024.jpg",
+        odkaz: "https://realitysnami.cz/nemovitost/podnajem-bytu-21-60-m%c2%b2-karvina-mizerov/"
+      },
+      {
+        stav: "prodano",
+        nazev: "Prodej pozemku 4 896 m²",
+        lokalita: "Václavovice",
+        dispozice: "Pozemek",
+        plocha: "4 896 m²",
+        cena: "3 990 000 Kč",
+        foto: "https://realitysnami.cz/wp-content/uploads/2026/07/1920x1920wm2407261155-5becf-prodej-pozemku-4-896-m2-vaclavovice-dji-0543-914ada49b6-4156027963.jpg",
+        odkaz: "https://realitysnami.cz/nemovitost/prodej-pozemku-4-896-m%c2%b2-vaclavovice/"
+      },
+      {
+        stav: "prodano",
+        nazev: "Pronájem bytu 3+1 s lodžií",
+        lokalita: "Ostrava – Dubina",
+        dispozice: "3+1",
+        plocha: "73 m²",
+        cena: "15 800 Kč / měsíc",
+        foto: "https://realitysnami.cz/wp-content/uploads/2026/07/1920x1920wm2407261155-6460b-pronajem-bytu-3-1-73-m2-ostrava-img-3731-b6fbda49b6-1027049126.jpg",
+        odkaz: "https://realitysnami.cz/nemovitost/pronajem-bytu-31-s-lodzii-73-m%c2%b2-ostrava/"
+      },
+      {
+        stav: "prodano",
+        nazev: "Prodej bytu 3+kk, 11. patro",
+        lokalita: "Ostrava – Hrabůvka, ul. Plzeňská",
+        dispozice: "3+kk",
+        plocha: "53 m²",
+        cena: "3 440 000 Kč",
+        foto: "https://realitysnami.cz/wp-content/uploads/2026/06/1920x1920wm2407261155-0e63e-prodej-bytu-3-kk-53-m2-11-patro-ostrava-hrabuvka-dsc09917-ad36da49b6-2008829966.jpg",
+        odkaz: "https://realitysnami.cz/nemovitost/prodej-bytu-3kk-53-m%c2%b2-11-patro-ostrava-hrabuvka/"
+      },
+      {
+        stav: "prodano",
+        nazev: "Prodej bytu 3+1 s lodžií",
+        lokalita: "Ostrava – Zábřeh",
+        dispozice: "3+1",
+        plocha: "70 m²",
+        cena: "3 390 000 Kč",
+        foto: "https://realitysnami.cz/wp-content/uploads/2026/04/1920x1920wm2508081243-91c8c-prodej-bytu-3-1-s-lodzii-70-m2-ostrava-zabreh-dsc05898-hdr-319bda49b6-324100487.jpg",
+        odkaz: "https://realitysnami.cz/nemovitost/prodej-bytu-31-s-lodzii-70-m%c2%b2-ostrava-zabreh/"
+      },
+      {
+        stav: "prodano",
+        nazev: "Prodej bytu 3+1",
+        lokalita: "Kopřivnice",
+        dispozice: "3+1",
+        plocha: "63 m²",
+        cena: "2 980 000 Kč",
+        foto: "https://realitysnami.cz/wp-content/uploads/2026/05/1920x1920wm2508081243-d978f-prodej-bytu-3-1-63-m2-koprivnice-ablona-pecet-inspekce-8e15da49b6-3516778316.jpg",
+        odkaz: "https://realitysnami.cz/nemovitost/prodej-bytu-31-63-m%c2%b2-koprivnice/"
+      },
+      {
+        stav: "prodano",
+        nazev: "Prodej bytu 2+1 s balkónem",
+        lokalita: "Karviná – Ráj",
+        dispozice: "2+1",
+        plocha: "52 m²",
+        cena: "2 850 000 Kč",
+        foto: "https://realitysnami.cz/wp-content/uploads/2026/05/1920x1920wm2407261155-70704-prodej-bytu-2-1-v-osobnim-vlastnictvi-s-balkonem-52m2-karvina-raj-ablona-pecet-inspekce-9114da49b6-1585952128-768x512.jpg",
+        odkaz: "https://realitysnami.cz/nemovitost/prodej-bytu-21-v-osobnim-vlastnictvi-s-balkonem-52m2-karvina-raj/"
+      },
+      {
+        stav: "prodano",
+        nazev: "Prodej bytu 2+1 s balkónem",
+        lokalita: "Karviná – Ráj",
+        dispozice: "2+1",
+        plocha: "54 m²",
+        cena: "2 550 000 Kč",
+        foto: "https://realitysnami.cz/wp-content/uploads/2026/02/1920x1920wm2407261155-add69-prodej-bytu-2-1-s-balkonem-v-osobnim-vlastnictvi-54-m2-karvina-raj-ablona-pecet-inspekce-e48184e41d-190631715-768x512.jpg",
+        odkaz: "https://realitysnami.cz/nemovitost/prodej-bytu-21-s-balkonem-v-osobnim-vlastnictvi-54-m%c2%b2-karvina-raj/"
+      },
+      {
+        stav: "prodano",
+        nazev: "Prodej bytu 2+1",
+        lokalita: "Kopřivnice, ul. Družební",
+        dispozice: "2+1",
+        plocha: "58 m²",
+        cena: "2 490 000 Kč",
+        foto: "https://realitysnami.cz/wp-content/uploads/2026/06/1920x1920wm2508081243-0630e-prodej-bytu-2-1-58-m2-koprivnice-ul-druzebni-ablona-pecet-inspekce-d506da49b6-968010367-768x512.jpg",
+        odkaz: "https://realitysnami.cz/nemovitost/prodej-bytu-21-58-m%c2%b2-koprivnice-ul-druzebni/"
+      },
+      {
+        stav: "prodano",
+        nazev: "Pronájem bytu 3+1 s vlastní zahradou",
+        lokalita: "Kozlovice",
+        dispozice: "3+1",
+        plocha: "58 m²",
+        cena: "12 000 Kč / měsíc",
+        foto: "https://realitysnami.cz/wp-content/uploads/2026/07/1920x1920wm2407261155-d1e8a-pronajem-bytu-3-1-58-m2-s-vlastni-zahradou-kozlovice-chatgpt-image-25-6-2026-16-16-05-fe07da49b6-3371426127.jpg",
+        odkaz: "https://realitysnami.cz/nemovitost/pronajem-bytu-31-58-m%c2%b2-s-vlastni-zahradou-kozlovice/"
+      }
+    ]
+  },
+
+  /* --- REFERENCE ---
+     Převzato z profilu na realitysnami.cz a z Google recenzí.
+     Kolik jich sem dáte, tolik jich karusel prolistuje (po třech). */
+  reference: [
+    {
+      text: "Rád bych poděkoval za spolupráci a prodej nemovitosti panu makléři Matěji Vojkůvkovi. Proaktivní, otevřená a profesionální komunikace během celé spolupráce, rychlé a ochotné jednání a skvělé odprezentování inzerované nemovitosti.",
+      autor: "Jakub Pala",
+      role: "Prodej nemovitosti · recenze Google"
+    },
+    {
+      text: "S panem Matějem Vojkůvkou jsme byli opravdu spokojeni. Komunikace byla skvělá, reagoval rychle a často i ve večerních hodinách. Vše kolem dokumentace zařídil za nás a celý proces nám díky tomu ušetřil spoustu času a starostí. Zároveň si dal záležet i na výběru vhodného nájemce. Můžeme jen doporučit.",
+      autor: "Radim Moravec",
+      role: "Pronájem nemovitosti · recenze Google"
+    },
+    {
+      text: "Matěje Vojkůvku mohu jen doporučit. Provázel mě celým procesem prodeje dvou bytů od začátku až do konce – poradil s postupem, pomohl vyřídit vše kolem hypotéky s bankou a osobně jezdil i na katastr nemovitostí, takže jsem se nemusel starat o žádné papírování. Co oceňuji nejvíc, je jeho přístup a ochota – i o víkendu byl k dispozici a odpovídal na SMS, když bylo potřeba něco rychle vyřešit.",
+      autor: "Marek Ždánský",
+      role: "Prodej bytu 2+1 s balkónem 52 m², Karviná – Ráj"
+    },
+    {
+      text: "Velmi děkuji za spolupráci s p. Matějem Vojkůvkou. Rychlé vstřícné jednání, vše dopodrobna vysvětlil. Profesionálně zpracovaná prezentace. Pomohl zorganizovat i související služby, vyklizení bytu, malování. Děkuji.",
+      autor: "Jan Martinák",
+      role: "Prodej bytu 3+1 63 m², Kopřivnice"
+    },
+    {
+      text: "Při koupi bytu jsem spolupracoval s panem Vojkůvkou a vše proběhlo hladce (vzhledem k tomu, že pracuji poměrně daleko od místa koupě), takže jsem měl minimum ježdění a pan Vojkůvka vše „oblítal“ za mě, tudíž maximální spokojenost.",
+      autor: "Adam Václík",
+      role: "Prodej bytu 2+1 s balkónem 54 m², Karviná – Ráj"
+    },
+    {
+      text: "S panem Matějem Vojkůvkou jsem naprosto spokojená, ochota a vstřícnost se jen tak nevidí. Pomohl s čímkoliv a také vše zařídil správně a vždy na telefonu. Ještě jednou mu děkuji za vše.",
+      autor: "Lenka Holubová",
+      role: "Prodej bytu 2+1 58 m², Kopřivnice, ul. Družební"
+    },
+    {
+      text: "S panem Vojkůvkou jsem nadmíru spokojen, má velmi dobrý přístup ke klientům, velmi dobře své práci rozumí a díky tomu jsme ušetřili čas a peníze. Když budu prodávat nebo kupovat nemovitost, určitě kontaktuji pana Vojkůvku.",
+      autor: "Erik Kaiseršat",
+      role: "Prodej bytu 3+1 s lodžií 70 m², Ostrava – Zábřeh"
+    }
+  ],
+
+  /* --- BLOG ---
+     zobrazit: false = celá sekce blogu i odkaz v menu jsou skryté.
+               Až budou články hotové, přepiš na true a blog se vrátí.
+     Nový článek přidáte zkopírováním celého bloku { ... }, vč. čárky.
+     „Číst dál" otevře článek v okně přímo na stránce — celý text
+     se píše do pole `text` (každý odstavec zvlášť v uvozovkách). */
+  blog: {
+    zobrazit: false,
+    nadpis: "Pár minut čtení, které se může vyplatit",
+    lead: "Každé pondělí přehled toho nejzajímavějšího, co se událo v realitách během uplynulého týdne.",
+    clanky: [
+      {
+        tag: "Ceny",
+        datum: "Ukázkový článek",
+        nadpis: "Kolik dnes stojí byt 2+1 v Ostravě?",
+        perex: "Rozdíl mezi Porubou a Zábřehem umí být klidně 400 tisíc. Rozebírám, co cenu na Ostravsku opravdu žene nahoru — a co je mýtus.",
+        text: [
+          "Sem přijde celý text článku. Každý odstavec se píše zvlášť do uvozovek a odděluje čárkou.",
+          "Až budou hotové skutečné články, stačí přepsat tento text a nadpis výše."
+        ]
+      },
+      {
+        tag: "Rady",
+        datum: "Ukázkový článek",
+        nadpis: "5 chyb, kvůli kterým se byt neprodá",
+        perex: "Přestřelená cena bývá jen jedna z nich. Nejčastější omyly, které prodej protáhnou o měsíce, a jak se jim vyhnout.",
+        text: [
+          "Sem přijde celý text článku. Každý odstavec se píše zvlášť do uvozovek a odděluje čárkou.",
+          "Až budou hotové skutečné články, stačí přepsat tento text a nadpis výše."
+        ]
+      },
+      {
+        tag: "Financování",
+        datum: "Ukázkový článek",
+        nadpis: "Kupující nedostal hypotéku. Co teď?",
+        perex: "Nejčastější důvod, proč prodej spadne na poslední chvíli. Jak si zájemce prověřit dřív, než podepíšete rezervaci.",
+        text: [
+          "Sem přijde celý text článku. Každý odstavec se píše zvlášť do uvozovek a odděluje čárkou.",
+          "Až budou hotové skutečné články, stačí přepsat tento text a nadpis výše."
+        ]
+      }
+    ]
+  },
+
+  /* --- Sekce KONTAKT (fotka č. 2) --- */
+  kontakt: {
+    foto: "assets/hero-foto.png",
+    nadpis: "Pojďme si nezávazně zavolat",
+    lead: "Ozvěte se mi a probereme vaši nemovitost, situaci na trhu i možnosti prodeje. Nacenění je zdarma a k ničemu vás nezavazuje."
+  },
+
+  /* --- Text v patičce --- */
+  paticka: "© 2026 Matěj Vojkůvka · Makléř společnosti Prosperity Financial Services a.s."
+};
+
+/* =====================================================================
+   ⚙️  KÓD STRÁNKY — sem už není potřeba sahat
+   ===================================================================== */
+const $ = (s)=>document.querySelector(s);
+const esc = (t)=>{const d=document.createElement('div');d.textContent=t;return d.innerHTML;};
+
+/* Nav + logo + patička */
+$('#brandName').childNodes[0].textContent = DATA.jmeno;
+$('#brandTitle').textContent = DATA.titul;
+$('#footText').textContent = DATA.paticka;
+$('#footProfil').href = DATA.profilUrl;
+$('#gdprLink').href = DATA.gdprUrl;
+
+/* Hero */
+$('#heroTitle').innerHTML = DATA.hero.titulek;
+$('#heroLead').textContent = DATA.hero.podtitulek;
+$('#heroCta1').textContent = DATA.hero.cta1;
+$('#heroCta2').textContent = DATA.hero.cta2;
+const chipIco = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#D9B97A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+$('#heroChips').innerHTML = DATA.hero.stitky.map(s=>`<span class="chip">${chipIco}${esc(s)}</span>`).join('');
+(function heroBg(){
+  const bg = $('#heroBg');
+  // Počítač = video na šířku, telefon = video na výšku (videoMobil).
+  // Při zapnutém „omezit animace" v systému se ukáže jen fotka.
+  const mobil = innerWidth < 768;
+  const omezit = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const zdroj = mobil ? DATA.hero.videoMobil : DATA.hero.video;
+  if (zdroj && !omezit) {
+    const v = document.createElement('video');
+    v.src = zdroj; v.autoplay = v.muted = v.loop = v.playsInline = true;
+    v.setAttribute('playsinline',''); v.setAttribute('muted','');
+    v.poster = DATA.hero.pozadiFoto;
+    v.addEventListener('error', ()=>{ v.remove(); ken(); });
+    bg.prepend(v);
+  } else ken();
+  function ken(){
+    const d = document.createElement('div');
+    d.className = 'kenburns';
+    d.style.backgroundImage = `url('${DATA.hero.pozadiFoto}')`;
+    bg.prepend(d);
+  }
+})();
+
+/* O mně */
+$('#aboutFoto').src = DATA.oMne.foto;
+$('#aboutBadge').textContent = DATA.oMne.odznak;
+if (DATA.oMne.nadpis) $('#aboutHeading').textContent = DATA.oMne.nadpis;
+else $('#aboutHeading').remove();
+$('#aboutText').innerHTML = DATA.oMne.odstavce.map(o=>`<p>${esc(o)}</p>`).join('');
+
+/* Reality na klíč */
+$('#tkHeading').textContent = DATA.naKlic.nadpis;
+$('#tkLead').textContent = DATA.naKlic.lead;
+$('#tkNote').textContent = DATA.naKlic.zaver;
+const keyIco = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#D9B97A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+$('#tkGrid').innerHTML = DATA.naKlic.body.map((b,i)=>`<div class="tk reveal" style="transition-delay:${i*70}ms"><span class="ico">${keyIco}</span><div><h3>${esc(b.nazev)}</h3><p>${esc(b.popis)}</p></div></div>`).join('');
+
+/* Pruh zdarma */
+$('#freeTitle').textContent = DATA.zdarma.nadpis;
+$('#freeText').textContent = DATA.zdarma.text;
+
+/* Nemovitosti */
+$('#propsHeading').textContent = DATA.nemovitosti.nadpis;
+$('#propsLead').textContent = DATA.nemovitosti.lead;
+const houseIco = '<svg width="64" height="64" viewBox="0 0 24 24" fill="none"><path d="M3 11l9-7 9 7v9a1 1 0 01-1 1h-5v-6h-6v6H4a1 1 0 01-1-1v-9z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg>';
+const pinIco = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-5.1-7-11a7 7 0 1114 0c0 5.9-7 11-7 11z" stroke="#C6A15B" stroke-width="2"/><circle cx="12" cy="10" r="2.5" stroke="#C6A15B" stroke-width="2"/></svg>';
+const STITKY = { prodej:['','V nabídce'], rezervovano:['res','Rezervováno'], prodano:['sold','Realizováno'] };
+function renderProps(filtr){
+  const el = $('#props');
+  const list = filtr==='prodej'
+    ? DATA.nemovitosti.seznam.filter(n=>n.stav==='prodej'||n.stav==='rezervovano')
+    : DATA.nemovitosti.seznam.filter(n=>n.stav===filtr);
+  el.innerHTML = list.length ? list.map(n=>`
+    <article class="card">
+      <div class="ph">
+        ${n.foto ? `<img src="${n.foto}" alt="${esc(n.nazev)}" loading="lazy">` : `<span class="noimg">${houseIco}</span>`}
+        <span class="badge ${(STITKY[n.stav]||STITKY.prodej)[0]}">${(STITKY[n.stav]||STITKY.prodej)[1]}</span>
+      </div>
+      <div class="body">
+        <h3>${esc(n.nazev)}</h3>
+        <span class="loc">${pinIco}${esc(n.lokalita)}</span>
+        <div class="meta"><span>${esc(n.dispozice)}</span><span>·</span><span>${esc(n.plocha)}</span></div>
+        <div class="price-row">
+          <span class="price">${esc(n.cena)}</span>
+          ${n.odkaz ? `<a class="more" href="${n.odkaz}" target="_blank" rel="noopener">Detail →</a>` : ''}
+        </div>
+      </div>
+    </article>`).join('')
+    : '<p style="color:var(--muted)">Momentálně žádné nemovitosti v této kategorii. Ozvěte se mi — možná mám něco v přípravě.</p>';
+}
+renderProps('prodej');
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  renderProps(t.dataset.f);
+}));
+
+/* Reference — karusel po třech */
+const track = $('#refTrack');
+track.innerHTML = DATA.reference.map(r=>`<div class="ref"><div class="stars">★★★★★</div><p>„${esc(r.text)}“</p><b>${esc(r.autor)}</b><span>${esc(r.role)}</span></div>`).join('');
+let refIdx = 0;
+function perView(){ return innerWidth<=640 ? 1 : innerWidth<=980 ? 2 : 3; }
+function maxIdx(){ return Math.max(0, DATA.reference.length - perView()); }
+function slideRefs(){
+  refIdx = Math.min(refIdx, maxIdx());
+  const card = track.querySelector('.ref');
+  if(!card) return;
+  const step = card.getBoundingClientRect().width + 28;
+  track.style.transform = `translateX(${-refIdx*step}px)`;
+  $('#refPrev').disabled = refIdx===0;
+  $('#refNext').disabled = refIdx>=maxIdx();
+}
+$('#refPrev').addEventListener('click',()=>{ refIdx=Math.max(0,refIdx-1); slideRefs(); });
+$('#refNext').addEventListener('click',()=>{ refIdx=Math.min(maxIdx(),refIdx+1); slideRefs(); });
+addEventListener('resize', slideRefs);
+slideRefs();
+
+/* Blog + modal s článkem — celá sekce se dá vypnout přes DATA.blog.zobrazit */
+if (!DATA.blog.zobrazit) {
+  $('#blog').remove();
+  $('#modal').remove();
+  $('#navBlog').remove();
+} else {
+$('#blogHeading').textContent = DATA.blog.nadpis;
+$('#blogLead').textContent = DATA.blog.lead;
+$('#posts').innerHTML = DATA.blog.clanky.map((c,i)=>`
+  <article class="post reveal" data-i="${i}" style="transition-delay:${i*80}ms">
+    <span class="tag">${esc(c.tag)}</span>
+    <span class="date">${esc(c.datum)}</span>
+    <h3>${esc(c.nadpis)}</h3>
+    <p>${esc(c.perex)}</p>
+    <span class="more">Číst dál →</span>
+  </article>`).join('');
+const modal = $('#modal');
+function openPost(i){
+  const c = DATA.blog.clanky[i];
+  $('#mTag').textContent = c.tag;
+  $('#mTitle').textContent = c.nadpis;
+  $('#mDate').textContent = c.datum;
+  $('#mBody').innerHTML = (c.text||[c.perex]).map(p=>`<p>${esc(p)}</p>`).join('');
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closePost(){ modal.classList.remove('open'); document.body.style.overflow = ''; }
+document.querySelectorAll('.post').forEach(p=>p.addEventListener('click',()=>openPost(+p.dataset.i)));
+$('#modalClose').addEventListener('click',closePost);
+modal.addEventListener('click',e=>{ if(e.target===modal) closePost(); });
+addEventListener('keydown',e=>{ if(e.key==='Escape') closePost(); });
+}
+
+/* Kontakt */
+$('#contactFoto').src = DATA.kontakt.foto;
+$('#contactHeading').textContent = DATA.kontakt.nadpis;
+$('#contactLead').textContent = DATA.kontakt.lead;
+const telIco = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z" stroke="#D9B97A" stroke-width="2" stroke-linejoin="round"/></svg>';
+const mailIco = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="#D9B97A" stroke-width="2"/><path d="M3 7l9 6 9-6" stroke="#D9B97A" stroke-width="2"/></svg>';
+const clockIco = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#D9B97A" stroke-width="2"/><path d="M12 7v5l3.5 2" stroke="#D9B97A" stroke-width="2" stroke-linecap="round"/></svg>';
+$('#contactItems').innerHTML = `
+  <div class="c-item"><span class="ico">${telIco}</span><div><span>Zavolejte mi</span><a href="tel:${DATA.telefon.replace(/\s/g,'')}">${esc(DATA.telefon)}</a></div></div>
+  <div class="c-item"><span class="ico">${mailIco}</span><div><span>Napište mi</span><a href="mailto:${DATA.email}">${esc(DATA.email)}</a></div></div>
+  <div class="c-item"><span class="ico">${clockIco}</span><div><span>Reakce na poptávku</span><b>Ozvu se vám do 24 hodin.</b></div></div>`;
+
+/* Sociální sítě */
+const igIco = '<svg width="22" height="22" viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16zm0 5.68a4.16 4.16 0 100 8.32 4.16 4.16 0 000-8.32zm0 6.86a2.7 2.7 0 110-5.4 2.7 2.7 0 010 5.4zm5.3-7.03a.97.97 0 11-1.94 0 .97.97 0 011.94 0z"/></svg>';
+const fbIco = '<svg width="22" height="22" viewBox="0 0 24 24"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.9h2.54V9.85c0-2.52 1.49-3.91 3.77-3.91 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.57v1.89h2.78l-.45 2.9h-2.33V22c4.78-.76 8.44-4.92 8.44-9.94z"/></svg>';
+$('#socLinks').innerHTML = `
+  <a class="soc" href="${DATA.instagram}" target="_blank" rel="noopener" aria-label="Instagram">${igIco}</a>
+  <a class="soc" href="${DATA.facebook}" target="_blank" rel="noopener" aria-label="Facebook">${fbIco}</a>`;
+
+/* --- ODESÍLÁNÍ FORMULÁŘŮ ---
+   Na Netlify se odešle přímo Netlify Forms (přijde e-mail, nic se neotevírá).
+   Když web běží jinde (nebo lokálně), použije se záložně e-mailový klient. */
+function handleForm(formId, msgId, okText, mailSubject){
+  const form = document.getElementById(formId);
+  const msg = document.getElementById(msgId);
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const btn = form.querySelector('button[type=submit]');
+    const orig = btn.textContent;
+    btn.disabled = true; btn.textContent = 'Odesílám…';
+    const fd = new FormData(form);
+    try{
+      const res = await fetch('/', {
+        method:'POST',
+        headers:{'Content-Type':'application/x-www-form-urlencoded'},
+        body:new URLSearchParams(fd).toString()
+      });
+      if(!res.ok) throw new Error('netlify');
+      msg.className = 'msg ok'; msg.textContent = okText;
+      form.reset();
+    }catch(err){
+      // Záloha: otevře e-mailového klienta
+      let telo = '';
+      fd.forEach((v,k)=>{ if(k!=='form-name' && k!=='bot-field' && v) telo += k+': '+v+'\n'; });
+      msg.className = 'msg err';
+      msg.textContent = 'Odeslání přes web se nezdařilo, otevírám e-mail.';
+      location.href = `mailto:${DATA.email}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(telo)}`;
+    }finally{
+      btn.disabled = false; btn.textContent = orig;
+    }
+  });
+}
+handleForm('contactForm','contactMsg','Děkuji! Ozvu se vám do 24 hodin.','Žádost o nacenění z webu');
+
+/* Nav scroll + mobilní menu */
+const nav = $('#nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+$('#burger').addEventListener('click',()=>{
+  $('#burger').classList.toggle('open');
+  $('#navlinks').classList.toggle('open');
+});
+document.querySelectorAll('#navlinks a').forEach(a=>a.addEventListener('click',()=>{
+  $('#burger').classList.remove('open');
+  $('#navlinks').classList.remove('open');
+}));
+
+/* Animace při scrollu */
+const io = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
