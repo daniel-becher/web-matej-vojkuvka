@@ -146,6 +146,8 @@ nav.scrolled .brand .name{font-size:1.32rem}
 .card .meta{display:flex;gap:14px;color:var(--muted);font-size:.84rem;font-weight:600;margin-bottom:18px}
 .card .price-row{margin-top:auto;display:flex;align-items:center;justify-content:space-between}
 .card .price{color:var(--navy);font-weight:800;font-size:1.18rem}
+.card .price-block{display:flex;align-items:baseline;flex-wrap:wrap;gap:2px 10px}
+.card .price-old{color:var(--muted);font-size:.84rem;font-weight:600;text-decoration:line-through;text-decoration-thickness:1px}
 .card .more{color:var(--gold-text);font-weight:700;font-size:.89rem}
 .card .more:hover{text-decoration:underline}
 
@@ -536,6 +538,8 @@ const DATA = {
      stav: "prodano"     = záložka Realizováno (prodeje i pronájmy)
      foto: odkaz na obrázek nebo lokální soubor ("assets/byt1.jpg").
            Prázdné ("") = zobrazí se zástupný symbol domečku.
+     puvodniCena: (volitelné) původní cena, zobrazí se přeškrtnutá vedle nové.
+                  Použij, když se nemovitost prodala výš. Jinak řádek smaž.
      Novou nemovitost přidáte zkopírováním celého bloku { ... }, vč. čárky. */
   nemovitosti: {
     nadpis: "Aktuální nabídka a úspěšně prodané",
@@ -637,7 +641,8 @@ const DATA = {
         lokalita: "Ostrava – Dubina",
         dispozice: "3+1",
         plocha: "73 m²",
-        cena: "15 800 Kč / měsíc",
+        cena: "16 000 Kč / měsíc",
+        puvodniCena: "15 800 Kč / měsíc",
         foto: "https://realitysnami.cz/wp-content/uploads/2026/07/1920x1920wm2407261155-6460b-pronajem-bytu-3-1-73-m2-ostrava-img-3731-b6fbda49b6-1027049126.jpg",
         odkaz: "https://realitysnami.cz/nemovitost/pronajem-bytu-31-s-lodzii-73-m%c2%b2-ostrava/"
       },
@@ -647,7 +652,8 @@ const DATA = {
         lokalita: "Kopřivnice",
         dispozice: "3+1",
         plocha: "63 m²",
-        cena: "2 980 000 Kč",
+        cena: "3 050 000 Kč",
+        puvodniCena: "2 980 000 Kč",
         foto: "https://realitysnami.cz/wp-content/uploads/2026/05/1920x1920wm2508081243-d978f-prodej-bytu-3-1-63-m2-koprivnice-ablona-pecet-inspekce-8e15da49b6-3516778316.jpg",
         odkaz: "https://realitysnami.cz/nemovitost/prodej-bytu-31-63-m%c2%b2-koprivnice/"
       },
@@ -657,7 +663,8 @@ const DATA = {
         lokalita: "Kozlovice",
         dispozice: "3+1",
         plocha: "58 m²",
-        cena: "12 000 Kč / měsíc",
+        cena: "12 500 Kč / měsíc",
+        puvodniCena: "12 000 Kč / měsíc",
         foto: "https://realitysnami.cz/wp-content/uploads/2026/07/1920x1920wm2407261155-d1e8a-pronajem-bytu-3-1-58-m2-s-vlastni-zahradou-kozlovice-chatgpt-image-25-6-2026-16-16-05-fe07da49b6-3371426127.jpg",
         odkaz: "https://realitysnami.cz/nemovitost/pronajem-bytu-31-58-m%c2%b2-s-vlastni-zahradou-kozlovice/"
       },
@@ -667,7 +674,8 @@ const DATA = {
         lokalita: "Kopřivnice, ul. Družební",
         dispozice: "2+1",
         plocha: "58 m²",
-        cena: "2 490 000 Kč",
+        cena: "2 710 000 Kč",
+        puvodniCena: "2 490 000 Kč",
         foto: "https://realitysnami.cz/wp-content/uploads/2026/06/1920x1920wm2508081243-0630e-prodej-bytu-2-1-58-m2-koprivnice-ul-druzebni-ablona-pecet-inspekce-d506da49b6-968010367-768x512.jpg",
         odkaz: "https://realitysnami.cz/nemovitost/prodej-bytu-21-58-m%c2%b2-koprivnice-ul-druzebni/"
       },
@@ -687,7 +695,7 @@ const DATA = {
         lokalita: "Ostrava – Zábřeh",
         dispozice: "3+1",
         plocha: "70 m²",
-        cena: "3 390 000 Kč",
+        cena: "3 440 000 Kč",
         foto: "https://realitysnami.cz/wp-content/uploads/2026/04/1920x1920wm2508081243-91c8c-prodej-bytu-3-1-s-lodzii-70-m2-ostrava-zabreh-dsc05898-hdr-319bda49b6-324100487.jpg",
         odkaz: "https://realitysnami.cz/nemovitost/prodej-bytu-31-s-lodzii-70-m%c2%b2-ostrava-zabreh/"
       },
@@ -697,7 +705,8 @@ const DATA = {
         lokalita: "Karviná – Ráj",
         dispozice: "2+1",
         plocha: "54 m²",
-        cena: "2 550 000 Kč",
+        cena: "2 750 000 Kč",
+        puvodniCena: "2 550 000 Kč",
         foto: "https://realitysnami.cz/wp-content/uploads/2026/02/1920x1920wm2407261155-add69-prodej-bytu-2-1-s-balkonem-v-osobnim-vlastnictvi-54-m2-karvina-raj-ablona-pecet-inspekce-e48184e41d-190631715-768x512.jpg",
         odkaz: "https://realitysnami.cz/nemovitost/prodej-bytu-21-s-balkonem-v-osobnim-vlastnictvi-54-m%c2%b2-karvina-raj/"
       }
@@ -883,7 +892,7 @@ function renderProps(filtr){
         <span class="loc">${pinIco}${esc(n.lokalita)}</span>
         <div class="meta"><span>${esc(n.dispozice)}</span><span>·</span><span>${esc(n.plocha)}</span></div>
         <div class="price-row">
-          <span class="price">${esc(n.cena)}</span>
+          <span class="price-block">${n.puvodniCena ? `<s class="price-old">${esc(n.puvodniCena)}</s>` : ''}<span class="price">${esc(n.cena)}</span></span>
           ${n.odkaz ? `<a class="more" href="${n.odkaz}" target="_blank" rel="noopener">Detail →</a>` : ''}
         </div>
       </div>
